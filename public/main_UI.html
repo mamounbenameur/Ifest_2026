@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaTrack</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_UI.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Header / Title Bar -->
+    <header class="title-bar">
+        <div class="logo-area">
+            <img src="assets/logo.png" alt="Logo" class="app-logo">
+            <h1 class="app-title">AquaTrack</h1>
+        </div>
+        <!-- Menu Container -->
+<div class="relative" id="menu-container">
+    <button id="menu-toggle"
+        class="text-white hover:text-blue-900 transition-colors duration-200 flex items-center">
+        
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-6 w-6"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div id="menu-dropdown"
+         class="absolute hidden bg-white shadow-lg rounded-md mt-2 z-10 min-w-[150px] right-0">
+         <h1>Menu </h1>
+        <a href="#" class="block px-4 py-2 text-gray-800  hover:underline rounded hover:bg-blue-50">Home</a>
+        <a href="main_UI.html" class="block px-4 py-2 text-gray-800 hover:underline rounded hover:bg-blue-50"> Settings</a>
+        <a href="#" class="block px-4 py-2 text-gray-800 hover:underline  rounded hover:bg-blue-50">About Us</a>
+        <a href="login.html" class="block px-4 py-2 text-red-800 hover:underline hover:bg-red-50 rounded"> Logout</a>
+    </div>
+</div>
+
+    </header>
+    <main class="dashboard">
+        <!-- Circular Progress Section -->
+        <section class="progress-section">
+            <div class="circle-container">
+                <div class="liquid-circle">
+                    <div class="liquid"></div>
+                    <div class="percentage">0%</div>
+                </div>
+            </div>
+            <div class="volume-text">0L / 300L</div>
+        </section>
+        <!-- Members List -->
+        <section class="members-section">
+            <div class="section-header">
+                <h2>Members</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="members-list" id="membersList">
+                <!-- Member items will be injected by JS -->
+                
+                <!-- Example Structure (will be dynamic)
+                <div class="member-card">
+                    <div class="avatar-container">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="member-info">
+                        <div class="name-row">
+                            <span class="name">Ahmed</span>
+                            <span class="fraction">63L / 100L</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: 63%;"></div>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+            <div class="add-member-link">
+                <a href="setting.html">Add a new member..</a>
+            </div>
+        </section>
+        <!-- r_alert -->
+            <div id="messageBox" style="  
+        display:none;
+        position:fixed;
+        top:20px; left:50%;
+        transform:translateX(-50%);
+        background:#222; color:#fff;
+        padding:10px 20px;
+        border-radius:8px;
+        z-index:9999;
+        "></div>
+    </main>
+    <script  type="module" src="UI_script.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaTrack</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style_UI.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <!-- Header / Title Bar -->
+    <header class="title-bar">
+        <div class="logo-area">
+            <img src="assets/logo.png" alt="Logo" class="app-logo">
+            <h1 class="app-title">AquaTrack</h1>
+        </div>
+        <!-- Menu Container -->
+        <div class="relative" id="menu-container">
+            <button id="menu-toggle"
+                class="text-white hover:text-blue-900 transition-colors duration-200 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+            <!-- Dropdown Menu -->
+            <div id="menu-dropdown"
+                class="absolute hidden bg-white shadow-lg rounded-md mt-2 z-10 min-w-[150px] right-0">
+                <h1>Menu</h1>
+                <a href="main_UI.html" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">Home</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">Settings</a>
+                <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-blue-50">About Us</a>
+                <a href="login.html" class="block px-4 py-2 text-red-600 hover:bg-red-50">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <!-- Central Profile Area -->
+        <div class="profile-area">
+            <div class="profile-circle" id="drop-zone">
+                <i class="fas fa-camera mb-2 text-2xl"></i>
+                <span>#drag your picture</span>
+            </div>
+            <input type="file" id="mainImageInput" accept="image/*" class="hidden">
+            <h2 class="family-name" id="familyName">Family-Name</h2>
+        </div>
+
+        <!-- Members Container -->
+        <div class="members-container" id="membersList">
+            <!-- Members will be dynamically added here -->
+            <div class="add-member-card" id="openModalBtn">
+                <div class="plus-icon">+</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Form -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Add New Member</h3>
+            <form id="memberForm">
+                <div class="form-group">
+                    <div id="modal-drop-zone" class="modal-drop-zone">
+                        <i class="fas fa-cloud-upload-alt mb-2 text-2xl"></i>
+                        <span>Drag a picture or Click to Select</span>
+                        <input type="file" id="memberImageInput" accept="image/*" class="hidden">
+                    </div>
+                    <div id="image-preview" class="hidden mt-2 flex justify-center">
+                        <img id="preview-img" src=""
+                            class="w-16 h-16 rounded-full object-cover border-2 border-accent-blue">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" required placeholder="Enter age">
+                </div>
+                <div class="form-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" required placeholder="Enter height">
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Create Member</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="UI_script.js"></script>
+</body>
+
+</html>

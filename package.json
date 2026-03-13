@@ -1,0 +1,19 @@
+{
+  "name": "electron_ifest2026",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^39.2.7"
+  },
+  "dependencies": {
+    "electro": "^2.1.1",
+    "firebase": "^12.8.0"
+  }
+}

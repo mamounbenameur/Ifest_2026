@@ -424,6 +424,7 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    
 }
 
 .add-member-card:hover {
@@ -441,6 +442,8 @@ body {
     justify-content: center;
     font-size: 1.5rem;
     color: white;
+    line-height: 1;
+
 }
 
 /* --- SECTION 4: Modals & Drop Zones --- */
@@ -465,6 +468,7 @@ body {
     max-width: 400px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(-50px);
 }
 
 .close-btn {
@@ -502,6 +506,35 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: var(--bg-primary);
     color: white;
+}
+
+.form-group input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1) calc(50% - 1px), rgba(255, 255, 255, 0.5) calc(50% - 1px), rgba(255, 255, 255, 0.5) calc(50% + 1px), rgba(255, 255, 255, 0.1) calc(50% + 1px));
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin: 15px 0;
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--accent-light);
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(41, 152, 255, 0.5);
+    transition: all 0.2s ease;
+}
+
+.form-group input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 0 15px var(--accent-blue);
 }
 
 .submit-btn {

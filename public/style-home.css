@@ -1,400 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap');
+
+:root {
+    --primary: #2563eb;
+    --primary-light: #60a5fa;
+    --secondary: #0ea5e9;
+    --accent: #f59e0b;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    background: #f8fafc;
+}
+
+h1, h2, h3 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+/* Glassmorphism Classes */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-premium);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 40px -10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Hero Scrollytelling Structure */
+.hero-scroll-wrapper {
+    height: 350vh; /* Total duration of the hero animation */
+    background: #020617;
+}
+
 .hero-pattern {
-    background-image: url('https://cdn.hswstatic.com/gif/water-update.jpg');
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+}
+
+.bg-layer {
+    position: absolute;
+    inset: 0;
     background-size: cover;
     background-position: center;
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Faster transitions for frames */
+    z-index: 0;
+}
+
+.bg-layer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4));
+}
+
+.hero-pattern::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.05) 0%, transparent 60%);
+    animation: rotate 20s linear infinite;
+    z-index: 1;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to bottom, #ffffff, #d1d5db);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Stats Progress Bars */
+.progress-container {
+    background: #f1f5f9;
+    border-radius: 100px;
+    height: 12px;
+    overflow: hidden;
     position: relative;
 }
-.hero-pattern::before {
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 100px;
+    position: relative;
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.progress-bar::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    /* background: linear-gradient(to right, rgba(37, 99, 235, 0.95), rgba(37, 99, 235, 0.85)); */
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: shine 2s infinite;
 }
-.stats-image {
-    background-image: url('https://images.unsplash.com/photo-1589758443935-67b7acc5e0c4?auto=format&fit=crop&q=80');
-    background-size: cover;
-    background-position: center;
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
+
+/* Buttons Overhaul */
+.btn-primary {
+    background: var(--white);
+    color: var(--primary);
+    padding: 1rem 2.5rem;
+    border-radius: 100px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    background: #f8fafc;
+}
+
+.btn-secondary {
+    border: 2px solid var(--white);
+    color: var(--white);
+    padding: 1rem 2.5rem;
+    border-radius: 100px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+/* Contact Form Premium */
 .contact {
-background: #fefefd; /* Sets the background color of the contact section */
-padding-top: 90px; /* Adds padding to the top of the contact section */
+    padding: 100px 0;
+    background: #ffffff;
 }
 
-.main_form .contactus {
-padding: 0px 15px; /* Adds padding to the input fields */
-margin-bottom: 30px; /* Adds margin below the input fields */
-width: 100%; /* Sets the width of the input fields to 100% */
-height: 44px; /* Sets the height of the input fields */
-background: #fefefd; /* Sets the background color of the input fields */
-color: #999898; /* Sets the text color of the input fields */
-font-size: 16px; /* Sets the font size of the input fields */
-font-weight: normal; /* Sets the font weight of the input fields */
-border: #ddd solid 1px; /* Sets the border of the input fields */
-}
-
+.main_form .contactus,
 .main_form .textarea {
-margin-bottom: 30px; /* Adds margin below the textarea */
-width: 100%; /* Sets the width of the textarea to 100% */
-background: #fefefd; /* Sets the background color of the textarea */
-color: #999898; /* Sets the text color of the textarea */
-font-size: 16px; /* Sets the font size of the textarea */
-font-weight: normal; /* Sets the font weight of the textarea */
-padding: 10px 15px; /* Adds padding to the textarea */
-height: 79px; /* Sets the height of the textarea */
-border: #ddd solid 1px; /* Sets the border of the textarea */
+    width: 100%;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    background: #f8fafc;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.main_form .contactus:focus,
+.main_form .textarea:focus {
+    border-color: var(--primary);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
 }
 
 .main_form .send_btn {
-font-size: 17px; /* Sets the font size of the send button */
-transition: ease-in all 0.5s; /* Adds a transition effect to the button */
-background-color: #2e2e2e; /* Sets the background color of the send button */
-text-transform: uppercase; /* Transforms the text to uppercase */
-color: #fff; /* Sets the text color of the send button */
-max-width: 155px; /* Sets the maximum width of the send button */
-width: 100%; /* Sets the width of the send button to 100% */
-display: block; /* Makes the send button a block element */
-margin: 0 auto; /* Centers the send button */
-font-weight: 500; /* Sets the font weight of the send button */
-border-radius: 5px; /* Rounds the corners of the send button */
-line-height: 47px; /* Sets the line height of the send button */
-height: 47px; /* Sets the height of the send button */
+    background: var(--primary);
+    color: var(--white);
+    padding: 16px 40px;
+    border-radius: 100px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
 }
 
 .main_form .send_btn:hover {
-background: #e5341d; /* Changes the background color of the send button on hover */
-color: #fff; /* Ensures the text color remains white on hover */
-transition: ease-in all 0.5s; /* Adds a transition effect on hover */
+    background: #1e40af;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-#request *::placeholder {
-color: #999898; /* Sets the placeholder text color for input fields */
-opacity: 1; /* Ensures the placeholder text is fully opaque */
-}
-
-.map_resposive {
-margin-top: 80px; /* Adds margin to the top of the map responsive section */
-}
-
-.map_resposive figure {
-margin: 0; /* Removes margin from the figure element */
-}
-
-button {
-border: 0;
-margin: 0;
-padding: 0;
-cursor: pointer;
-}
-
-.full {
-width: 100%;
-float: left;
-margin: 0;
-padding: 0;
-}
-.titlepage {
-padding-bottom: 60px;
-}
-
-.titlepage h2 {
-font-size: 50px;
-font-weight: bold;
-line-height: 55px;
-color: #2e2e2e;
-position: relative;
-z-index: 99;
-}
-
-.read_more {
-display: inline-block;
-background: #1c89bd;
-color: #fff;
-max-width: 271px;
-height: 57px;
-line-height: 57px;
-width: 100%;
-font-size: 17px;
-text-align: center;
-font-weight: 500;
-transition: ease-in all 0.5s;
-}
-
-.read_more:hover {
-background: #e5341d;
-color: #fff;
-transition: ease-in all 0.5s;
-}
-
-.img_responsive {
-max-width: 100%;
-}
-
-.text_align_center {
-text-align: center;
-}
-
-.text_align_left {
-text-align: left;
-}
-
-.container {
-    max-width: 1170px;
-}
-
-
-
-/*---------------------------- 
-loader  
-----------------------------*/
-
-.loader_bg {
-    position: fixed;
-    z-index: 9999999;
-    background: #fff;
-    width: 100%;
-    height: 100%;
-}
-
-.loader {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.loader img {
-    width: 280px;
-}
-
-/*--------------------------------------------------------------------- 
-header 
----------------------------------------------------------------------*/
-
-header {
-    background:transparent;
-    width: 100%;
-    z-index: 9;
-    position: absolute;
-}
-.head_top {
-   background: #2a2b2b;
-   height: 55px;
-   line-height: 55px;
-
-}
-ul.con_icon li a {
-   color: #aaaaa8;
-} 
-ul.con_icon li a:hover {
-   color: #1f91cd;
-}
-ul.con_icon li a i {
-   padding-right: 10px;
-}
-ul.social_icon {
-    float: left;
-    padding-top: 20px;
-}
-
-ul.social_top li {
-    display: inline-block;
-    padding-right: 3px;
-}
-
-ul.social_top li:last-child {
-    padding-right: 0;
-}
-ul.social_top li a {
-    background: #bdbbbb;
-    color: #2a2b2b;
-    width: 25px;
-    height: 25px;
-    display: inline-block;
-    text-align: center;
-    line-height: 25px;
-    border-radius: 100%;
-    font-size: 15px;
-    font-weight: bold;
-}
-ul.social_top li a:hover {
-    background: #1f91cd;
-    color: #fff;
-    transition: ease-in all 0.7s;
-}
-ul.login_deteil li {
-   display: inline-block;
-   padding-right: 50px;
-}
-ul.login_deteil li a {
-   color: #aaaaa8;
-}
-ul.login_deteil li a:hover {
-   color:#1f91cd;
-}
-ul.login_deteil li:last-child {
-    padding-right: 0;
-}
-.head-bottom {
-   background: transparent;
-   height: 60px;
-   padding: 16px 20px;
-}
-.logo a {
-   text-shadow:0px 1px 1px #5498bb;
-   color: #2a2b2b;
-   font-size: 30px;
-   line-height: 30px;
-   font-weight: bold;
-   text-shadow: #ddd 0 0 0 10px;
-}
-.logo a span {
-   color: #5498bb;
-}
-/*--------------------------------------------------------------------- 
-menu section
----------------------------------------------------------------------*/
-
-ul.email {
-    float: right;
-
-}
-ul.email li {
-   display: inline-block;
-   text-align: center;
-   padding-right: 55px
-}
-ul.email li:last-child {
-   padding-right: 0;
-}
-ul.email li a i {
-    color: #388ab2;
-    font-size: 20px;
-}
-.sidepanel {
-    width: 0;
-    position: fixed;
-    z-index: 9999999;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidepanel a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #fff;
-    display: block;
-    transition: 0.3s;
-}
-
-.sidepanel a:hover {
-    color: #e5341d;
-}
-
-.sidepanel a.active {
-    color: #e5341d;
-}
-
-.sidepanel .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-}
-
-.openbtn {
-    cursor: pointer;
-    background-color: transparent;
-    color: white;
-    border: none;
-}
-
-
-/** banner_main **/
-
-.banner_main {
-    background:url(../images/bbnner.png);
-    width: 100%;
-    background-size: cover;
+/* Realistic Water Drop */
+.water-drop {
+    width: 48px;
+    height: 72px;
+    background: rgba(39, 39, 51, 0.514);
+    backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50% 50% 50% 50% / 70% 70% 40% 40%;
     position: relative;
-    height: 1265px; 
-    background-position: center;
-    filter:drop-shadow(1px 8px 7px #0000003b);
-     
-}
-.section {position: relative;}
-.section::before {
-   position: absolute;
-   content: "";
-   bottom: 0%;
-   background: url(../images/top.png);
-   background-repeat: no-repeat;
-   left: 0px;
-   width: 164px;
-   height: 100%;
-   bottom: 0;
-   background-position: center;
-
+    margin: 0 auto 3rem;
+    box-shadow: 
+        inset -2px -4px 6px rgba(255, 255, 255, 0.4),
+        inset 2px 4px 6px rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    will-change: transform, opacity;
 }
 
-.section::after {
-   position: absolute;
-   content: "";
-   top: 0;
-   background: url(../images/top.png);
-   background-repeat: no-repeat;
-   right: 0px;
-   width: 164px;
-   height: 100%;
-   bottom: 0;
-   background-position: center;
-
+.water-drop::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 6px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0.8;
 }
 
-.bluid {
-    padding-top: 150px;
-    text-align: center;
+/* Splash Effect */
+.splash-effect {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
 }
 
-.banner_main .bluid h1 {
-    color: #fff;
-    font-size: 91px;
-    line-height: 95px;
-    font-weight: bold;
-    padding-bottom: 20px;
+/* Reveal Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.banner_main .bluid p {
-    color: #fff;
-    line-height: 25px;
-    font-weight: 500;
-    font-size: 17px;
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.banner_main .bluid .read_more {
-    margin-right: 5px;
+/* Header/Nav Adjustments */
+.head-bottom {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.map_resposive {
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically (if needed) */
-    height: 100%; /* Set a height if needed */
+.logo a {
+    text-decoration: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    color: var(--text-main);
+    font-weight: 800;
 }
 
-.map_resposive img {
-    max-width: 100%; /* Ensure the image is responsive */
-    height: auto; /* Maintain aspect ratio */
+.logo span {
+    color: var(--primary);
+}
+
+.stats-image {
+    background: url('https://images.unsplash.com/photo-1589758443935-67b7acc5e0c4?auto=format&fit=crop&q=80') center/cover;
+    position: relative;
+}
+
+.stats-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
 }

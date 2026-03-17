@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuContainer = document.getElementById('menu-container');
     const membersList = document.getElementById('membersList');
 
-    // --- PAGE A SPECIFIC (Circular Progress) ---
+    // --- PAGE A  (Circular Progress) ---
     const mainPercentage = document.querySelector('.percentage');
     const liquid = document.querySelector('.liquid');
     const volumeText = document.querySelector('.volume-text');
 
-    // --- PAGE B SPECIFIC (Profile View) ---
+    // --- PAGE B  (Profile View) ---
     const memberModal = document.getElementById('memberModal');
     const openModalBtn = document.getElementById('openModalBtn');
     const closeBtn = document.querySelector('.close-btn');
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INITIALIZATION ---
     renderMembers();
 
-    // Shared Menu logic
+    //  Menu logic
     if (menuToggle) {
         menuToggle.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Logging Message (from UI_script.js)
+    // Logging Message 
     const l_logging_message = localStorage.getItem("logging_message");
     if (l_logging_message) {
         showMessage(l_logging_message, "green");
@@ -54,9 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Page A Logic (Progress Section)
     if (mainPercentage && liquid && volumeText) {
-        const totalGoal = members.length * 100 || 300;
-        const totalIntake = members.reduce((sum, m) => sum + (m.current || 0), 0);
-        const globalPercentage = Math.round((totalIntake / totalGoal) * 100);
+        const totalGoal = members.reduce((sum, m) => sum + (parseFloat(m.target) || 0), 0) || 0;
+        const totalIntake = members.reduce((sum, m) => sum + (parseFloat(m.current) || 0), 0);
+        const globalPercentage = totalGoal > 0 ? Math.round((totalIntake / totalGoal) * 100) : 0;
 
         setTimeout(() => {
             updateMainDisplay(totalIntake, totalGoal, globalPercentage);
@@ -116,30 +116,66 @@ document.addEventListener('DOMContentLoaded', () => {
             }));
         }
 
+        // Activity Slider 
+        const activityInput = document.getElementById('activity');
+        const activityLabel = document.getElementById('activityLabel');
+        // slider  0.8 to 1.2 with 0.1 step.
+        const activityLevels = { 
+            "0.8": "Very Low", 
+            "0.9": "Low", 
+            "1": "Normal", 
+            "1.1": "High", 
+            "1.2": "Very High" 
+        };
+
+        if (activityInput && activityLabel) {
+            activityInput.oninput = () => {
+                // Handle strings lmchmriglin  
+                const val = parseFloat(activityInput.value).toString();
+                activityLabel.innerText = activityLevels[val] || "Normal";
+            };
+        }
+
         memberForm.onsubmit = (e) => {
             e.preventDefault();
+            const rawVal = activityInput ? parseFloat(activityInput.value).toString() : "1";
+            const multiplier = parseFloat(rawVal) || 1.0;
+            const activityDesc = activityLevels[rawVal] || "Normal";
+            
+            const w = parseFloat(document.getElementById('height').value) || 0;
+            const a = parseFloat(document.getElementById('age').value) || 0;
+            const target = calculateQWater(w, a, multiplier);
+
             const newMember = {
                 id: Date.now(),
                 name: document.getElementById('name').value,
-                age: document.getElementById('age').value,
-                height: document.getElementById('height').value,
+                age: a,
+                weight: w,
+                activity: activityDesc,
+                multiplier: multiplier,
                 image: currentImageData,
                 current: 0,
-                target: 100
+                target: target
             };
             members.push(newMember);
             saveMembers();
             addMemberCard(newMember);
             memberForm.reset();
+            if (activityLabel) activityLabel.innerText = "Normal";
             memberModal.style.display = "none";
         };
     }
 
     // --- CORE FUNCTIONS ---
 
+    function calculateQWater(W, A, F_a, T = 25) {
+        // Formula: Q_water_m = (0.03*W + 0.005*A)*F_a + (50 + 0.5*MIN(A;40)) * (1 + 0.01*(T-20)) + (20 + 0.1*SQRT(W))
+        const q_water_m = (0.03 * W + 0.005 * A) * F_a + (50 + 0.5 * Math.min(A, 40)) * (1 + 0.01 * (T - 20)) + (20 + 0.1 * Math.sqrt(W));
+        return Math.round(q_water_m * 10) / 10;
+    }
+
     function renderMembers() {
         if (!membersList) return;
-        const selector = membersList.classList.contains('members-container') ? '.member-card' : '.member-card'; // same for now
         const cards = membersList.querySelectorAll('.member-card');
         cards.forEach(card => card.remove());
         members.forEach(member => addMemberCard(member));
@@ -153,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.dataset.id = data.id;
 
         if (isVertical) {
-            // New vertical card style
+            // Vertical card (Settings)
             const avatarContent = data.image
                 ? `<img src="${data.image}" alt="${data.name}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`
                 : `<i class="fas fa-user"></i>`;
@@ -164,7 +200,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="member-details">
                     <div class="detail-row"><span class="label">Name:</span><span class="value">${data.name}</span></div>
                     <div class="detail-row"><span class="label">Age:</span><span class="value">${data.age}</span></div>
-                    <div class="detail-row"><span class="label">Weight:</span><span class="value">${data.height}kg</span></div>
+                    <div class="detail-row"><span class="label">Weight:</span><span class="value">${data.weight || data.height}kg</span></div>
+                    <div class="detail-row"><span class="label">Goal:</span><span class="value">${data.target}L</span></div>
                 </div>
             `;
 
@@ -191,8 +228,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             membersList.insertBefore(card, openModalBtn);
         } else {
-            // Original horizontal progress card style
-            const percent = Math.round(((data.current || 0) / (data.target || 100)) * 100);
+            // Horizontal card (Main)
+            const target = data.target || 100;
+            const current = data.current || 0;
+            const percent = Math.round((current / target) * 100);
+            
             const avatarContent = data.image
                 ? `<img src="${data.image}" alt="${data.name}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`
                 : `<i class="fas fa-user"></i>`;
@@ -202,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="member-info">
                     <div class="name-row">
                         <span class="name">${data.name}</span>
-                        <span class="fraction">${data.current || 0}L / ${data.target || 100}L</span>
+                        <span class="fraction">${current}L / ${target}L</span>
                     </div>
                     <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0%"></div></div>
                 </div>
@@ -227,10 +267,12 @@ document.addEventListener('DOMContentLoaded', () => {
         function animate(time) {
             let timeFraction = (time - startTime) / duration;
             if (timeFraction > 1) timeFraction = 1;
-            const nowPercent = Math.floor(start + (percent - start) * timeFraction);
-            const nowVolume = Math.floor(0 + (current - 0) * timeFraction);
+            const nowPercent = Math.min(100, Math.floor(start + (percent - start) * timeFraction));
+            const nowVolume = Math.round((current * timeFraction) * 10) / 10;
+            const targetVolume = Math.round(target * 10) / 10;
+            
             mainPercentage.innerText = `${nowPercent}%`;
-            volumeText.innerText = `${nowVolume}L / ${target}L`;
+            volumeText.innerText = `${nowVolume}L / ${targetVolume}L`;
             liquid.style.height = `${nowPercent - 10}%`;
             if (nowPercent >= 100) { liquid.classList.add('full'); liquid.style.backgroundColor = '#ff4d4d'; }
             else { liquid.classList.remove('full'); }
@@ -239,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(animate);
     }
 
-    // --- HELPERS ---
+    // --- ******h ---
     function saveMembers() { localStorage.setItem('aquaTrackMembers', JSON.stringify(members)); }
     function saveMainProfileImage(data) { localStorage.setItem('aquaTrackMainImage', data); updateMainProfileUI(data); }
     function updateMainProfileUI(data) { if (mainDropZone) mainDropZone.innerHTML = `<img src="${data}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`; }

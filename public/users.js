@@ -113,7 +113,7 @@ function signUpUser(family_name, password,gmail) {
             })
             .then(() => {
                     localStorage.setItem("logging_message", `✅ Welcome ${family_name}s Sign-up successful! Your account has been created.`);
-                    window.location.href = "main_UI.html";
+                    window.location.href = "loding_page.html";
 
             })
             .catch(() => {
@@ -154,7 +154,7 @@ function loginUser(family_name, password) {
             if (matchedUser) {
                 // Example: redirect or open main app window
                 localStorage.setItem("logging_message", `✅ Welcome back ,${family_name}s !`);
-                window.location.href = "main_UI.html";
+                window.location.href = "loding_page.html";
             } else {
                 showMessage("❌ Incorrect Family Name or Password. Please try again!","red");
             }

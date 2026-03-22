@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In Page</title>
+    <link rel="stylesheet" href="logging.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="form-box">
+                <h2 class="title">Welcome :)</h2>
+                <form id="signupForm" class="signup-form">
+                    
+                    <div class="input-group">
+                        <input type="text" id="family_name" required>
+                        <label> Family_Name </label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="gmail" required>
+                        <label>Family_Gmail </label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password"  id="password" required>
+                        <label>Password</label><span id="togglePassword" class="eye-icon">👁️</span>
+                        
+                    </div>
+                    <button type="submit" class="signup-button" id="submit-button" onclick="signUpUser(
+                    document.getElementById('family_name').value,
+                    document.getElementById('password').value,
+                     document.getElementById('gmail').value )">Sign Up</button>
+                    <div id="error-message" style="color: red;"></div>
+
+                    <p class="signup-link">
+                        Already have an account?  <a href="login.html">Log In</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div> 
+    <!-- r_alert -->
+            <div id="messageBox" style="  
+        display:none;
+        position:fixed;
+        top:20px; left:50%;
+        transform:translateX(-50%);
+        background:#222; color:#fff;
+        padding:10px 20px;
+        border-radius:8px;
+        z-index:9999;
+        "></div>
+
+    <script  src="users.js"></script>
+
+    
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>read data</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding-top: 100px;
+    }
+    button {
+      background: #008cff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005ecb;
+    }
+    #messageBox {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: #222;
+      color: #fff;
+      min-width: 250px;
+      transition: all 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <h1>read data</h1>
+  <button onclick="testFirebase()"> check </button>
+
+  <div id="messageBox"></div>
+
+  <script>
+   const databaseURL = "https://ifest2026-default-rtdb.europe-west1.firebasedatabase.app/logging.json";
+
+    function showMessage(text, color = "#333") {
+      const box = document.getElementById("messageBox");
+      box.style.background = color;
+      box.textContent = text;
+    }
+
+    async function testFirebase() {
+      showMessage(" Testing connection...", "#444");
+
+      try {
+        const response = await fetch(databaseURL, { method: "GET" });
+
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        const data = await response.json();
+
+        showMessage("Connected successfully!\n\nData: " + JSON.stringify(data, null, 2), "green");
+      } catch (error) {
+        showMessage(" Connection failed: " + error.message, "red");
+      }
+    }
+  </script>
+</body>
+</html>

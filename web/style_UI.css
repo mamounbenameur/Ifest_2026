@@ -37,8 +37,6 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 15px;
-    -webkit-app-region: drag;
-    /* Draggable window */
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About the team behind AquaTrack - Twins Amin and Mamoun Ben Ameur">
+    <title>About Us - AquaTrack</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom CSS to match styling -->
+    <link rel="stylesheet" type="text/css" href="style-home.css">
+    <style>
+        .placeholder-image {
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: 600;
+            text-align: center;
+            border-radius: 1.5rem;
+            min-height: 300px;
+            border: 2px dashed #cbd5e1;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .placeholder-image:hover {
+            background-color: #cbd5e1;
+            border-color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+
+        /* Horizontal Image Slider Animation */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: 1.5rem;
+        }
+        .slider-track {
+            display: flex;
+            width: 300%; /* Adjust based on number of slides */
+            animation: slideHorizontal 12s infinite cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .slide {
+            width: 33.333%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        @keyframes slideHorizontal {
+            0%, 25% { transform: translateX(0%); }
+            33%, 58% { transform: translateX(-33.333%); }
+            66%, 91% { transform: translateX(-66.666%); }
+            100% { transform: translateX(0%); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Menu Bar (matching main_UI.html) -->
+    <header class="title-bar" style="height: 50px; background-color: rgba(11, 29, 42, 0.95); display: flex; justify-content: space-between; align-items: center; padding: 0 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; font-family: 'Roboto', sans-serif;">
+        <div class="logo-area" style="display: flex; align-items: center; gap: 10px;">
+            <img src="images/logo.jpeg" alt="Logo" class="app-logo" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+            <h1 class="app-title" style="font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 1px; color: #e0e0e0; margin: 0;">AquaTrack</h1>
+        </div>
+        <!-- Menu Container -->
+<div class="relative" id="menu-container">
+    <button id="menu-toggle"
+        class="text-white hover:text-blue-900 transition-colors duration-200 flex items-center">
+        
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-6 w-6"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <div id="menu-dropdown"
+         class="absolute hidden bg-white shadow-lg rounded-md mt-2 z-10 min-w-[150px] right-0">
+         
+        <a href="main_UI.html" class="block px-4 py-2 text-gray-800  hover:underline rounded hover:bg-blue-50">Home</a>
+        <a href="setting.html" class="block px-4 py-2 text-gray-800 hover:underline rounded hover:bg-blue-50"> Settings</a>
+        <a href="about_us.html" class="block px-4 py-2 text-gray-800 hover:underline  rounded hover:bg-blue-50">About Us</a>
+        <a href="home.html" class="block px-4 py-2 text-red-800 hover:underline hover:bg-red-50 rounded"> Logout</a>
+    </div>
+</div>
+
+        </div>
+    </header>
+
+    <!-- Full-screen Hero Area adapted for About Us -->
+    <div class="h-screen md:min-h-[80vh] flex items-center justify-center relative overflow-hidden text-center text-white">
+        <!-- Big beautiful background image (Water related) -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516939884455-1445c8652f83?auto=format&fit=crop&q=80')] opacity-90 bg-cover bg-center transition-transform duration-1000 scale-105 hover:scale-110"></div>
+        <div class="absolute inset-0 bg-[#0b1d2a]/80"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center py-12">
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-extrabold mb-6 tracking-wide text-white hero-title-anim">
+                Discover Our Journey: <br/><span class="text-blue-300 font-extrabold">Amin & Mamoun Ben Ameur</span>
+            </h1>
+            <div class="w-32 h-1 bg-blue-400 mx-auto mb-6 rounded hero-line-anim"></div>
+            <p class="text-lg md:text-xl text-white font-medium max-w-4xl mx-auto leading-relaxed hero-text-anim">
+                Dedicated members of the Tunisian Association for the Future of Science and Technology (ATAST) for nearly 7 years • IOAI China Finalists • iFEST Gold Medalists
+            </p>
+        </div>
+    </div>
+
+    <!-- Inline Styles for Custom Animation -->
+    <style>
+        .hero-title-anim {
+            opacity: 0;
+            animation: slideUpFade 1s cubic-bezier(0.25, 1, 0.5, 1) 0.2s forwards;
+        }
+        .hero-line-anim {
+            opacity: 0;
+            transform: scaleX(0);
+            transform-origin: center;
+            animation: exactScaleX 0.8s ease-out 0.8s forwards;
+        }
+        .hero-text-anim {
+            opacity: 0;
+            animation: slideUpFade 1s cubic-bezier(0.25, 1, 0.5, 1) 1.2s forwards;
+        }
+        @keyframes slideUpFade {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes exactScaleX {
+            0% { opacity: 0; transform: scaleX(0); }
+            100% { opacity: 1; transform: scaleX(1); }
+        }
+    </style>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-24 space-y-32">
+        <!-- The Twins Section -->
+        <section class="max-w-6xl mx-auto reveal">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-16 text-center">Meet the Twins</h2>
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <h3 class="text-3xl font-bold text-blue-600">Amin & Mamoun Ben Ameur</h3>
+                    <p class="text-lg text-slate-600 leading-relaxed font-medium">
+                        We are high schoolers in the 3rd grade, deeply passionate about creating and innovation. From early on we have been fascinated by technology and its immense potential to solve real-world problems.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed font-medium">
+                        Our journey has been driven by endless curiosity and a shared goal to build solutions that will have a positive impact on the environment.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="glass-card p-4">
+                        <div class="placeholder-image p-0 overflow-hidden relative group">
+                            <img src="images/amin.jpg" alt="Amin Ben Ameur" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://ui-avatars.com/api/?name=Amin+Ben+Ameur&background=0D8ABC&color=fff&size=500&length=1'">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-white font-bold">Amin Ben Ameur</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-4 translate-y-8 sm:translate-y-8">
+                        <div class="placeholder-image p-0 overflow-hidden relative group">
+                            <img src="images/mamoun.jpg" alt="Mamoun Ben Ameur" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" onerror="this.src='https://ui-avatars.com/api/?name=Mamoun+Ben+Ameur&background=10B981&color=fff&size=500&length=1'">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-white font-bold">Mamoun Ben Ameur</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project AquaTrack & iFEST 2025 -->
+        <section class="max-w-6xl mx-auto glass-card p-12 reveal">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 relative">
+                    <div class="slider-container min-h-[400px]">
+                        <div class="slider-track min-h-[400px]">
+                            <!-- Slide 1: Gold Medal -->
+                            <div class="slide p-0 overflow-hidden">
+                                <img src="images/gold.jpg" alt="iFEST 2025 Gold Medal" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder-image border-none w-full h-full hidden flex items-center justify-center">
+                                    <div class="text-center">
+                                        <div class="text-5xl mb-4">🥇</div>
+                                        <h4 class="text-2xl font-bold text-slate-800">iFEST 2025 Gold Medal</h4>
+                                        <p class="text-sm text-slate-500">Drop 'gold_medal.jpg' in images folder</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 2: Presentation -->
+                            <div class="slide p-0 overflow-hidden">
+                                <img src="images/p2.jpeg" alt="Project Presentation" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder-image border-none w-full h-full bg-slate-200 hidden flex items-center justify-center">
+                                    <div class="text-center">
+                                        <div class="text-5xl mb-4">📸</div>
+                                        <h4 class="text-2xl font-bold text-slate-800">Project Presentation</h4>
+                                        <p class="text-sm text-slate-500">Drop 'presentation.jpg' in images folder</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Slide 3: IOAI -->
+                            <div class="slide p-0 overflow-hidden">
+                                <img src="images/ioai.jpg" alt="IOAI in China" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <div class="placeholder-image border-none w-full h-full hidden flex items-center justify-center">
+                                    <div class="text-center">
+                                        <div class="text-5xl mb-4">🇨🇳</div>
+                                        <h4 class="text-2xl font-bold text-slate-800">IOAI in China</h4>
+                                        <p class="text-sm text-slate-500">Drop 'ioai.jpg' in images folder</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8 order-1 lg:order-2">
+                    <div class="inline-block bg-yellow-100/80 text-yellow-800 px-6 py-2 rounded-full font-bold text-sm tracking-widest uppercase shadow-sm border border-yellow-200">
+                        Gold Medalists - iFEST 2025
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-extrabold text-slate-800 mb-6">The AquaTrack Project</h3>
+                        <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
+                            <p>
+                                We were proud to be awarded the Gold Medal at iFEST 2025 with our project <b>AquaTrack</b>. The objective of this project is to provide solutions that ensure the conservation and preservation of water, a valuable resource for future generations.
+                            </p>
+                            <p>
+                                For that, the plan is to build an application aligned to an IoT device that is capable of monitoring the flow rate of water continuously. The application will measure the actual and our projected utilization of water, based on our mathematical model, to evaluate and optimize the utilization of water in a better way.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Belief Section -->
+        <section class="max-w-5xl mx-auto text-center reveal">
+            <div class="bg-gradient-to-br from-slate-900 to-black rounded-[40px] shadow-3xl p-16 text-white relative overflow-hidden border border-slate-800">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1543950153-27abf3c95101?auto=format&fit=crop&q=80')] opacity-20 bg-cover bg-center"></div>
+                
+                <div class="relative z-10 flex flex-col items-center">
+                    
+                    <!-- Speech Bubble Slider Section -->
+                    <div class="w-full max-w-5xl mx-auto overflow-hidden relative">
+                        <div class="flex w-[200%] speech-slider-track">
+                            
+                            <!-- Slide 1: Amin -->
+                            <div class="w-1/2 flex-none flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8 text-left px-4">
+                                <!-- Avatar -->
+                                <div class="flex-shrink-0 mt-4">
+                                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden border-[3px] border-blue-500 shadow-xl relative group mx-auto md:mx-0">
+                                        <img src="images/amin.jpg" alt="Amin Ben Ameur" class="w-full h-full object-cover relative z-10" onerror="this.src='https://ui-avatars.com/api/?name=Amin+Ben+Ameur&background=0D8ABC&color=fff&size=200'">
+                                    </div>
+                                    <p class="text-xs text-blue-300 text-center mt-3 font-bold uppercase tracking-widest">Amin</p>
+                                </div>
+                                
+                                <!-- Speech Bubble -->
+                                <div class="relative bg-slate-800 p-8 md:p-10 rounded-3xl shadow-2xl md:rounded-tl-sm ml-0 md:ml-2 border border-slate-700 w-full mt-6 md:mt-0">
+                                    <!-- Triangle tail -->
+                                    <div class="hidden md:block absolute -left-4 top-8 w-0 h-0 border-t-[12px] border-t-transparent border-r-[18px] border-r-slate-800 border-b-[12px] border-b-transparent"></div>
+                                    <div class="md:hidden absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-b-[18px] border-b-slate-800 border-r-[12px] border-r-transparent"></div>
+                                    
+                                    <h4 class="font-bold text-blue-400 mb-5 text-xl md:text-2xl" style="font-family: 'Cinzel', serif;">The Heartbeat of Earth</h4>
+                                    <p class="text-lg md:text-xl leading-relaxed italic text-slate-300 font-medium">
+                                        "Water is far more than just a passing resource; it is the very heartbeat of our planet and the essence of life itself. I deeply believe that tracking and understanding every drop isn't just science—it's survival."
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2: Mamoun -->
+                            <div class="w-1/2 flex-none flex flex-col md:flex-row items-center md:items-start gap-4 md:gap-8 text-left px-4">
+                                <!-- Avatar -->
+                                <div class="flex-shrink-0 mt-4">
+                                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-slate-800 flex items-center justify-center overflow-hidden border-[3px] border-emerald-500 shadow-xl relative group mx-auto md:mx-0">
+                                        <img src="images/mamoun.jpg" alt="Mamoun Ben Ameur" class="w-full h-full object-cover relative z-10" onerror="this.src='https://ui-avatars.com/api/?name=Mamoun+Ben+Ameur&background=10B981&color=fff&size=200'">
+                                    </div>
+                                    <p class="text-xs text-emerald-400 text-center mt-3 font-bold uppercase tracking-widest">Mamoun</p>
+                                </div>
+                                
+                                <!-- Speech Bubble -->
+                                <div class="relative bg-slate-800 p-8 md:p-10 rounded-3xl shadow-2xl md:rounded-tl-sm ml-0 md:ml-2 border border-slate-700 w-full mt-6 md:mt-0">
+                                    <!-- Triangle tail -->
+                                    <div class="hidden md:block absolute -left-4 top-8 w-0 h-0 border-t-[12px] border-t-transparent border-r-[18px] border-r-slate-800 border-b-[12px] border-b-transparent"></div>
+                                    <div class="md:hidden absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-l-transparent border-b-[18px] border-b-slate-800 border-r-[12px] border-r-transparent"></div>
+                                    
+                                    <h4 class="font-bold text-emerald-400 mb-5 text-xl md:text-2xl" style="font-family: 'Cinzel', serif;">Engineering the Future</h4>
+                                    <p class="text-lg md:text-xl leading-relaxed italic text-slate-300 font-medium">
+                                        "By harnessing the power of Artificial Intelligence and modern IoT systems, we have made it our profound duty to protect this invaluable asset. Conserving water today is our ultimate technological pledge to the generations of tomorrow."
+                                    </p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <style>
+                        .speech-slider-track {
+                            animation: slideSpeeches 6s infinite cubic-bezier(0.77, 0, 0.175, 1);
+                        }
+                        .speech-slider-track:hover {
+                            animation-play-state: paused;
+                        }
+                        @keyframes slideSpeeches {
+                            0%, 40% { transform: translateX(0%); }
+                            50%, 90% { transform: translateX(-50%); }
+                            100% { transform: translateX(0%); }
+                        }
+                    </style>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 border-t border-slate-200 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8">AquaTrack</h2>
+            <p class="text-slate-500"> 👁‍🗨 2025 AquaTrack Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal Animations
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        window.addEventListener('scroll', () => {
+            const viewportHeight = window.innerHeight;
+            
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < viewportHeight * 0.85) {
+                    el.classList.add('active');
+                }
+            });
+        });
+        
+        // Initial check on load
+        window.dispatchEvent(new Event('scroll'));
+
+        // Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuDropdown = document.getElementById('menu-dropdown');
+        if(menuToggle && menuDropdown) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menuDropdown.classList.toggle('hidden');
+            });
+            document.addEventListener('click', (e) => {
+                if (!menuDropdown.contains(e.target) && !menuToggle.contains(e.target)) {
+                    menuDropdown.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
